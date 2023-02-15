@@ -1,10 +1,7 @@
-import numpy as np
 from PyQt5 import QtWidgets, QtGui, QtCore
-from ColumnCal import Ui_ColumnCal
-import math
 from function_source import *
 
-def ColCalButtonClicked(data):    
+def columncal_button_clicked(data):    
     try :
         sectionshape=data.section.currentText()
         fy, fu =steel_material_info(data.SteelStrength.currentText())
@@ -32,13 +29,13 @@ def ColCalButtonClicked(data):
         [Area,Ix,Iy,Sx,Sy,rx,ry,JJ,Cw,Zx,Zy,Awx,Awy]=section_property(B,D,tw,tf,sectionshape)
     
         #柱lRFD強度計算
-        [Pnc,phiPnc,Pnt,phiPnt,lumdac_x,lumdac_y]=Cal_Pnc(sectionshape,data.cft,B,D,tw,tf,Area,fc,fy,ElasticM,Kx,Ky,Lx,Ly,rx,ry)
+        [Pnc,phiPnc,Pnt,phiPnt,lumdac_x,lumdac_y]=cal_Pnc(sectionshape,data.cft,B,D,tw,tf,Area,fc,fy,ElasticM,Kx,Ky,Lx,Ly,rx,ry)
 
         #結實斷面檢核
         [section,lumdaW]=section_compact(sectionshape,B,D,tw,tf,fy,Fr,data.SteelMade,'壓彎')
 
         #梁lRFD強度計算
-        [Lp,Lr,Mpx,Mnx,Mny,phiMnx,phiMny,Mrx]=Cal_Mn(Lb,Cb,fy,FL,Area,Sx,Sy,Zx,Zy,Iy,ry,Cw,JJ,ElasticM,ShearM,sectionshape)  
+        [Lp,Lr,Mpx,Mnx,Mny,phiMnx,phiMny,Mrx]=cal_Mn(Lb,Cb,fy,FL,Area,Sx,Sy,Zx,Zy,Iy,ry,Cw,JJ,ElasticM,ShearM,sectionshape)  
 
         #stress ratio
         if Pu < 0.2*phiPnc :
@@ -47,7 +44,7 @@ def ColCalButtonClicked(data):
             pmmratio=Pu/phiPnc+8/9*(Mux/phiMnx+Muy/phiMny)
 
         #剪力強度計算
-        [Vny,phiVny,shearratio]=Cal_ShearStrength(lumdaW,fy,Awy,Vuy)
+        [Vny,phiVny,shearratio]=cal_ShearStrength(lumdaW,fy,Awy,Vuy)
 
 
         #結果輸出

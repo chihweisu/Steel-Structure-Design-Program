@@ -9,6 +9,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from widget_cnnct import cnnctwidget
+import icons_rc
 
 
 class Ui_CnnctDsgn(object):
@@ -1660,8 +1662,6 @@ class Ui_CnnctDsgn(object):
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'PMingLiU\'; font-weight:400;\">hiiiiii</span></p></body></html>"))
         self.calbutton.setText(_translate("CnnctDsgn", "Design"))
         self.closeButton1.setText(_translate("CnnctDsgn", "Back"))
-from cnnctwidget import cnnctwidget
-import icons_rc
 
 
 if __name__ == "__main__":

@@ -105,7 +105,7 @@ def section_compact (sectionshape,B,D,tw,tf,fy,Fr,SteelMade,element):
     return section,lumdaW
 
 #梁lRFD強度計算
-def Cal_Mn (Lb,Cb,fy,FL,Area,Sx,Sy,Zx,Zy,Iy,ry,Cw,JJ,ElasticM,ShearM,sectionshape):    
+def cal_Mn (Lb,Cb,fy,FL,Area,Sx,Sy,Zx,Zy,Iy,ry,Cw,JJ,ElasticM,ShearM,sectionshape):    
     X1=math.pi/Sx*(ElasticM*ShearM*JJ*Area/2)**0.5
     X2=4*Cw/Iy*(Sx/(ShearM*JJ))**2   
     Mpx=fy*Zx/100
@@ -136,7 +136,7 @@ def Cal_Mn (Lb,Cb,fy,FL,Area,Sx,Sy,Zx,Zy,Iy,ry,Cw,JJ,ElasticM,ShearM,sectionshap
     return Lp,Lr,Mpx,Mnx,Mny,phiMnx,phiMny,Mrx
 
 #柱lRFD強度計算
-def Cal_Pnc(sectionshape,cft,B,D,tw,tf,Area,fc,fy,ElasticM,Kx,Ky,Lx,Ly,rx,ry):
+def cal_Pnc(sectionshape,cft,B,D,tw,tf,Area,fc,fy,ElasticM,Kx,Ky,Lx,Ly,rx,ry):
     if sectionshape =='I型': 
         ####################     I型柱    #########################
         if cft =='yes':
@@ -192,7 +192,7 @@ def Cal_Pnc(sectionshape,cft,B,D,tw,tf,Area,fc,fy,ElasticM,Kx,Ky,Lx,Ly,rx,ry):
 
 
 #剪力強度計算
-def Cal_ShearStrength(lumdaW,fy,Aw,Vu=0):
+def cal_ShearStrength(lumdaW,fy,Aw,Vu=0):
     kv=5
     if lumdaW<=50*(kv/fy)**0.5 :
         Vn=0.6*fy*Aw
@@ -206,14 +206,14 @@ def Cal_ShearStrength(lumdaW,fy,Aw,Vu=0):
     shearratio=Vu/phiVny
     return Vn,phiVny,shearratio
 
-def Get_Bolt_Diameter(keyin):
+def get_Bolt_Diameter(keyin):
     chart={'M19': 1.9, 'M22': 2.2, 'M24': 2.4, 'M27': 2.7, 'M30': 3}
     db=chart.get(keyin,'none')
     dh_bolt=db+0.15
     d_bolt=db+0.3
     return db,dh_bolt,d_bolt
 
-def Get_Bolt_Strength(keyin):
+def get_Bolt_Strength(keyin):
     chart={'F10T-N': [7.5,4], 'F10T-X': [7.5,5], 'A325-N': [6.3,3.36], 'A325-X': [6.3,4.2], 'A490-N': [7.95,4.2], 'A490-N': [7.95,5.25]}
     result=chart.get(keyin,'none')
     Fnt=result[0]

@@ -1,63 +1,63 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from menu import Ui_menu
-from BeamCal_base import BeamCalButtonClicked
-from BeamCal import Ui_BeamCal
-from ColumnCal import Ui_ColumnCal
-from ColumnCal_base import ColCalButtonClicked
-from CnnctDsgn import Ui_CnnctDsgn
-from CnnctDsgn_base import CnnctDsgnButtonClicked
+from ui_menu import Ui_Menu
+from beamcal_base import beamcal_button_clicked
+from ui_beamcal import Ui_BeamCal
+from ui_columncal import Ui_ColumnCal
+from columncal_base import columncal_button_clicked
+from ui_cnnctdsgn import Ui_CnnctDsgn
+from cnnctdsgn_base import cnnctdsgn_button_clicked
 
-class menu_controller(QtWidgets.QMainWindow):
+class MenuController(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()  # in python3, super(Class, self).xxx = super().xxx
         self.setWindowIcon(QtGui.QIcon('cover.png'))
         # self.setWindowTitle("title")
-        self.ui = Ui_menu()
+        self.ui = Ui_Menu()
         self.ui.setupUi(self)
         self.setup_control()
 
     def setup_control(self):
         # TODO
-        self.ui.FlexCal.clicked.connect(self.FlexCalClicked)
-        self.ui.ColumnCal.clicked.connect(self.ColumnCalClicked)
-        self.ui.CnnctDsgn.clicked.connect(self.CnnctDsgnClicked)
+        self.ui.FlexCal.clicked.connect(self.flexcal_clicked)
+        self.ui.ColumnCal.clicked.connect(self.columncal_clicked)
+        self.ui.CnnctDsgn.clicked.connect(self.cnnctdsgn_clicked)
 
-    def FlexCalClicked(self):
+    def flexcal_clicked(self):
       self.hide()
-      self.ui=w2_controller()
+      self.ui=W2Controller()
       self.ui.show()
 
-    def ColumnCalClicked(self):
+    def columncal_clicked(self):
       self.hide()
-      self.ui=w3_controller()
+      self.ui=W3Controller()
       self.ui.show()
 
-    def CnnctDsgnClicked(self):
+    def cnnctdsgn_clicked(self):
       self.hide()
-      self.ui=w4_controller()
+      self.ui=W4Controller()
       self.ui.show()
 
 
-class w2_controller(QtWidgets.QMainWindow,Ui_BeamCal):
+class W2Controller(QtWidgets.QMainWindow,Ui_BeamCal):
   def __init__(self):
-    super(w2_controller,self).__init__()
+    super(W2Controller,self).__init__()
     self.setupUi(self)
     self.setup_control()
 
   def setup_control(self):
     self.Mux.setText('0')
     self.Vuy.setText('0')
-    self.calbutton.clicked.connect(lambda:BeamCalButtonClicked(self))
+    self.calbutton.clicked.connect(lambda:beamcal_button_clicked(self))
     self.closeButton1.clicked.connect(self.closebutton1Clicked)
 
   def closebutton1Clicked(self):
     self.hide()
-    self.ui=menu_controller()
+    self.ui=MenuController()
     self.ui.show() 
 
-class w3_controller(Ui_ColumnCal,w2_controller,QtWidgets.QMainWindow):
+class W3Controller(Ui_ColumnCal,W2Controller,QtWidgets.QMainWindow):
   def __init__(self):
-    super(w3_controller,self).__init__()
+    super(W3Controller,self).__init__()
     self.setupUi(self)
     self.setup_control()
 
@@ -69,16 +69,16 @@ class w3_controller(Ui_ColumnCal,w2_controller,QtWidgets.QMainWindow):
     self.Vuy.setText('0')
     self.cft='no'
     self.label_fc.clicked.connect(self.label_fcClicked)
-    self.calbutton.clicked.connect(lambda:ColCalButtonClicked(self))
+    self.calbutton.clicked.connect(lambda:columncal_button_clicked(self))
     self.closeButton1.clicked.connect(self.closebutton1Clicked)
 
   def label_fcClicked(self) :
     self.cft='yes' if self.label_fc.isChecked() else 'no'  
     return self.cft
 
-class w4_controller(Ui_CnnctDsgn,w2_controller,QtWidgets.QMainWindow):
+class W4Controller(Ui_CnnctDsgn,W2Controller,QtWidgets.QMainWindow):
   def __init__(self):
-    super(w4_controller,self).__init__()
+    super(W4Controller,self).__init__()
     self.setupUi(self)
     self.setup_control()
 
@@ -87,7 +87,7 @@ class w4_controller(Ui_CnnctDsgn,w2_controller,QtWidgets.QMainWindow):
     self.Vg.setText('0')
     self.sd='yes'
     self.label_selfdesign.clicked.connect(self.selfdesignClicked)
-    self.calbutton.clicked.connect(lambda:CnnctDsgnButtonClicked(self))
+    self.calbutton.clicked.connect(lambda:cnnctdsgn_button_clicked(self))
     self.closeButton1.clicked.connect(self.closebutton1Clicked)
 
   def selfdesignClicked(self) :

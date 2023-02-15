@@ -9,6 +9,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from widget_colmpl import colmplwidget
+import icons_rc
 
 
 class Ui_ColumnCal(object):
@@ -1018,8 +1020,6 @@ class Ui_ColumnCal(object):
         self.label_Muy.setText(_translate("ColumnCal", "       Muy (tf-m)     "))
         self.label_Vux.setText(_translate("ColumnCal", "         Vux (tf)        "))
         self.label_Vuy.setText(_translate("ColumnCal", "          Vuy (tf)       "))
-from colmplwidget import colmplwidget
-import icons_rc
 
 
 if __name__ == "__main__":

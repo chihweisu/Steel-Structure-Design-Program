@@ -1,9 +1,8 @@
 import numpy as np
 import math
-from ColumnCal_base import section_compact,Cal_Mn,Cal_ShearStrength
 from function_source import *
 
-def BeamCalButtonClicked(data):
+def beamcal_button_clicked(data):
     try:
         fy, fu =steel_material_info(data.SteelStrength.currentText())
         Fr=steel_fabrication_info(data.SteelMade.currentText())
@@ -25,11 +24,11 @@ def BeamCalButtonClicked(data):
         [section,lumdaW]=section_compact('I型',B,D,tw,tf,fy,Fr,data.SteelMade,'彎')
 
         #梁lRFD強度計算
-        [Lp,Lr,Mpx,Mnx,Mny,phiMnx,phiMny,Mrx]=Cal_Mn(Lb,Cb,fy,FL,Area,Sx,Sy,Zx,Zy,Iy,ry,Cw,JJ,ElasticM,ShearM,'I型')  
+        [Lp,Lr,Mpx,Mnx,Mny,phiMnx,phiMny,Mrx]=cal_Mn(Lb,Cb,fy,FL,Area,Sx,Sy,Zx,Zy,Iy,ry,Cw,JJ,ElasticM,ShearM,'I型')  
         pmmratio=Mux/phiMnx
             
         #剪力強度計算
-        [Vny,phiVny,shearratio]=Cal_ShearStrength(lumdaW,fy,Awy,Vuy)
+        [Vny,phiVny,shearratio]=cal_ShearStrength(lumdaW,fy,Awy,Vuy)
 
         #結果輸出
         info1='fy= '+str(round(fy,2))+'  tf/cm^2'

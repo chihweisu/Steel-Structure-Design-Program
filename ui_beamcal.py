@@ -9,7 +9,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from widget_mpl import mplwidget
+import icons_rc
 
 class Ui_BeamCal(object):
     def setupUi(self, BeamCal):
@@ -583,8 +584,7 @@ class Ui_BeamCal(object):
         self.closeButton1.setText(_translate("BeamCal", "Back"))
         self.label_Mux.setText(_translate("BeamCal", "       Mux (tf-m)     "))
         self.label_Vuy.setText(_translate("BeamCal", "          Vuy (tf)       "))
-from mplwidget import mplwidget
-import icons_rc
+
 
 
 if __name__ == "__main__":
